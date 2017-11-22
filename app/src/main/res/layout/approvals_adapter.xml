@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="80dp"
     android:background="#ee31c0"
     android:elevation="5dp"
     android:orientation="horizontal"
@@ -10,24 +10,14 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
         <CheckBox
             android:id="@+id/checkbox"
-            android:checked="false"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:checked="false" />
 
-        <!--<de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:id="@+id/profile_Image"-->
-        <!--android:layout_width="75dp"-->
-        <!--android:layout_height="75dp"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:src="@drawable/default_acc"-->
-        <!--app:civ_border_color="#455000"-->
-        <!--app:civ_border_width="1dp"-->
-
-        <!--/>-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,13 +34,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="95dp"
-            android:visibility="gone"
             android:layout_marginTop="15dp"
             android:fontFamily="serif"
             android:text="LEAD 1"
             android:textColor="#8618a3"
             android:textSize="20dp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+             />
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/id_switch"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tab1_timetv"
@@ -63,22 +61,6 @@
             android:textSize="15dp"
             android:textStyle="normal" />
 
-        <ImageView
-            android:id="@+id/tab1_mgs_iv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="65dp"
-            android:layout_marginTop="50dp"
-            />
 
-        <ImageView
-            android:id="@+id/tab1_call_iv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="50dp"
-            />
     </android.support.v7.widget.CardView>
 </LinearLayout>

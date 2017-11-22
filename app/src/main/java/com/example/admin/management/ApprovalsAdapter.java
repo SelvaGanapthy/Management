@@ -1,23 +1,33 @@
 package com.example.admin.management;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Admin on 11/22/2017.
  */
 
 public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.ViewHolder> {
+    Context context;
     String[] data;
     View row;
+    static AlertDialog alertDialog;
 
-    public ApprovalsAdapter(String[] data) {
+    public ApprovalsAdapter(String[] data, Context context) {
         this.data = data;
+        this.context = context;
     }
 
     @Override
@@ -28,20 +38,46 @@ public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.View
 
     @Override
     public void onBindViewHolder(final ApprovalsAdapter.ViewHolder holder, final int position) {
-        holder.checkBox.setTag(position);
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+
+        holder.id_switch.setTag(position);
+        holder.id_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                holder.tab1_titletv.setVisibility(View.VISIBLE);
-                holder.tab1_titletv.setText(data[position]);
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    alert.setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                           Toast.makeText(context,"true",Toast.LENGTH_SHORT).show();
+                            holder.id_switch.setChecked(true);
+                        }
+                    });
+                    alert.setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            holder.id_switch.setChecked(false);
+                        }
+                    });
+
+                    alertDialog = alert.create();
+                    alert.show();
+
+                    holder.tab1_titletv.setVisibility(View.VISIBLE);
+                    holder.tab1_titletv.setText(data[position]);
+                } else
+                    holder.tab1_titletv.setVisibility(View.GONE);
+
             }
         });
+//        holder.id_switch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                holder.tab1_titletv.setVisibility(View.VISIBLE);
+//                holder.tab1_titletv.setText(data[position]);
+//
+//            }
+//        });
 
-        if (!holder.checkBox.isChecked())
-        {
-            holder.tab1_titletv.setVisibility(View.GONE);
-            holder.tab1_titletv.setText(data[position]);
-        }
 
     }
 
@@ -52,14 +88,14 @@ public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tab1_titletv;
-        ImageView tab1_msgiv;
+        SwitchCompat id_switch;
         CheckBox checkBox;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tab1_titletv = (TextView) itemView.findViewById(R.id.tab1_titletv);
-            tab1_msgiv = (ImageView) itemView.findViewById(R.id.tab1_mgs_iv);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkbox);
+            id_switch = (SwitchCompat) itemView.findViewById(R.id.id_switch);
         }
     }
 }

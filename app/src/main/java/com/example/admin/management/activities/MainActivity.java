@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        adapter = new ApprovalsAdapter(new String[]{"LEAD 1", "LEAD 2", "LEAD 3", "LEAD 4", "LEAD 5","LEAD 1", "LEAD 2", "LEAD 3", "LEAD 4", "LEAD 5"});
+        adapter = new ApprovalsAdapter(new String[]{"LEAD 1", "LEAD 2", "LEAD 3", "LEAD 4", "LEAD 5","LEAD 1", "LEAD 2", "LEAD 3", "LEAD 4", "LEAD 5"},MainActivity.this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
