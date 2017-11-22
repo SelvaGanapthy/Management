@@ -15,17 +15,19 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 /**
  * Created by Admin on 11/22/2017.
  */
 
 public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.ViewHolder> {
     Context context;
-    String[] data;
+    List<ApprovalsModel> data;
     View row;
     static AlertDialog alertDialog;
 
-    public ApprovalsAdapter(String[] data, Context context) {
+    public ApprovalsAdapter(List<ApprovalsModel> data, Context context) {
         this.data = data;
         this.context = context;
     }
@@ -39,7 +41,7 @@ public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.View
     @Override
     public void onBindViewHolder(final ApprovalsAdapter.ViewHolder holder, final int position) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(context);
-
+        final ApprovalsModel approvalsmodel = data.get(position);
         holder.id_switch.setTag(position);
         holder.id_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -48,7 +50,7 @@ public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.View
                     alert.setPositiveButton("Allow", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                           Toast.makeText(context,"true",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "true", Toast.LENGTH_SHORT).show();
                             holder.id_switch.setChecked(true);
                         }
                     });
@@ -63,7 +65,7 @@ public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.View
                     alert.show();
 
                     holder.tab1_titletv.setVisibility(View.VISIBLE);
-                    holder.tab1_titletv.setText(data[position]);
+                    holder.tab1_titletv.setText(approvalsmodel.getApprovalName());
                 } else
                     holder.tab1_titletv.setVisibility(View.GONE);
 
@@ -83,7 +85,7 @@ public class ApprovalsAdapter extends RecyclerView.Adapter<ApprovalsAdapter.View
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

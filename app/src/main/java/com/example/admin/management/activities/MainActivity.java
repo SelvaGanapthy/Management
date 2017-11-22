@@ -1,5 +1,6 @@
 package com.example.admin.management.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,16 +44,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        adapter = new ApprovalsAdapter(new String[]{"LEAD 1", "LEAD 2", "LEAD 3", "LEAD 4", "LEAD 5","LEAD 1", "LEAD 2", "LEAD 3", "LEAD 4", "LEAD 5"},MainActivity.this);
+        adapter = new ApprovalsAdapter(dataLoad(), MainActivity.this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
-//
-//    public List<ApprovalsModel> dataLoad()
-//    {
-//        String[]
-//
-//    }
+
+    public List<ApprovalsModel> dataLoad() {
+        String[] approvalName = {"Gokul", "Balajisir", "MKsir", "karthick", "Sai", "Senthil", "selva", "Bala", "Raju", "Sathish"};
+        String callCentername = "callcentre", vendorName = "vendor", po_id = "Po_";
+        double amt = 0;
+        for (int i = 0; i < approvalName.length; i++) {
+            ApprovalsModel approvalsModel = new ApprovalsModel();
+            approvalsModel.setAmount(amt + (i + 25));
+            approvalsModel.setApprovalName(approvalName[i]);
+            approvalsModel.setCallCentername(callCentername + i);
+            approvalsModel.setVendorName(vendorName + i);
+            approvalsModel.setPoId(po_id + i);
+
+            dataList.add(approvalsModel);
+
+        }
+        return dataList;
+    }
 
     @Override
     public void onClick(View v) {
@@ -61,7 +74,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 id_layoutMainfunction.setVisibility(View.GONE);
                 id_layoutApprovals.setVisibility(View.VISIBLE);
                 break;
+            case R.id.bt_transactions:
+                Intent i = new Intent(MainActivity.this, Transaction.class);
+                startActivity(i);
+                break;
 
         }
     }
+
+
 }
